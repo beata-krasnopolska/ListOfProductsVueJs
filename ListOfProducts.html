@@ -24,7 +24,7 @@
 
         <h2>List of selected products</h2>
             <ul v-show="selectedProducts.length>0"></ul>            
-                <li v-for="product in selectedProducts" v-bind:key="product.name">{{product.name}} | {{product.kind}}</li>
+                <li v-for="product in selectedProducts" v-bind:key="product.name" @click="selectToRemove(product,index)">{{product.name}} | {{product.kind}}</li>
             </ul>
     </div>
 
@@ -47,9 +47,12 @@
             selectProduct(product, index){
                 this.products.splice(index,1);
                 this.selectedProducts.push(product);
+            },
+            selectToRemove(product, index){
+                this.selectedProducts.splice(index,1);
+                this.products.push(product);
             }
         }
-
     })
 
 </script>
