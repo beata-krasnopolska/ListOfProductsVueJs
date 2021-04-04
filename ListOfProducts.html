@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta chrset="UTF-8">
+<meta name="viewport" content="width-device-width initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>List Of Selected Prodects</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+    li {
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>List of Products</h2>
+            <ul>
+                <li v-for="(product, index) in products" v-bind:key="product.name" @click="selectProduct(product,index)">{{product.name}} | {{product.kind}}</li>
+            </ul>
+
+
+        <h2>List of selected products</h2>
+            <ul v-show="selectedProducts.length>0"></ul>            
+                <li v-for="product in selectedProducts" v-bind:key="product.name">{{product.name}} | {{product.kind}}</li>
+            </ul>
+    </div>
+
+<script>
+    const vm = new Vue ({
+        el: "#app",
+        data() {
+            return {
+                products: [
+                    {name: "apple", kind: "fruit"},
+                    {name: "pear", kind: "fruit"},
+                    {name: "cucumber", kind: "vegetable"},
+                    {name: "tomato", kind: "vegetable"},
+                    {name: "chocolate", kind: "sweets"},
+                ],
+                selectedProducts: [],
+            }
+        },
+        methods: {
+            selectProduct(product, index){
+                this.products.splice(index,1);
+                this.selectedProducts.push(product);
+            }
+        }
+
+    })
+
+</script>
+</body>
+
+</html>
